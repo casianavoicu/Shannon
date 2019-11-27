@@ -1,0 +1,10 @@
+E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\bin\Debug\Shannon.exe.config
+E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\bin\Debug\Shannon.exe
+E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\bin\Debug\Shannon.pdb
+E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\obj\Debug\Shannon.csprojAssemblyReference.cache
+E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\obj\Debug\Shannon.Form1.resources
+E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\obj\Debug\Shannon.Properties.Resources.resources
+E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\obj\Debug\Shannon.csproj.GenerateResource.cache
+E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\obj\Debug\Shannon.csproj.CoreCompileInputs.cache
+E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\obj\Debug\Shannon.exe
+E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\obj\Debug\Shannon.pdb
