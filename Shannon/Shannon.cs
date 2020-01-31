@@ -22,33 +22,52 @@ namespace Shannon
         public Dictionary<byte, int> frequenciesNotSorted ;
         public Dictionary<byte, int> frequenciesNotSorted1;
         public Dictionary<byte, string>finalList1;
+        public Dictionary<byte, string> fluxFinalF;
+        public int a;
         BitWriter bitWriter;
         BitReader bitReader;
+        public string filePath;
+        public string filePathIn;
+        public string filePathOut;
+        public string filePathOutFinal;
         public List<Tuple<byte, int>> frequenciesNotSortedTest;
         public List<Tuple<byte, int>> frequenciesNotSortedTest1;
         public List<Tuple<byte, string>> flux = new List<Tuple<byte, string>>();
-
+        public static string extension;
         public List<Tuple<byte, string,int>> fluxFinal = new List<Tuple<byte, string,int>>();
-        public Shannon(byte[] contentOfBytes)
+        public Shannon(byte[] contentOfBytes,string strFileName)
         {
             this.contentOfBytes = contentOfBytes;
+            this.filePath = strFileName;
+            
         }
-        public void DecodeShannon(string filepath)
+        public Shannon(string strFileName)
         {
-            string filePathIn = @"E:\FACULTATE\an 4\Sem1_Mine\output16.txt";
+            
+            this.filePathIn = strFileName;
+        }
 
-            BitWriter bitWriter2 = new BitWriter(filePathIn);
-            finalDictionarySortedSum.Clear();
+        public bool DecodeShannon(string filepathIn,out Dictionary<byte, string> fluxFinalF)
+        {
+            fluxFinalF = new Dictionary<byte, string>();
+            string result;
+            this.filePathOut = filepathIn;
+            result = Path.GetFileName(filePathOut);
+     
+            string directoryName;
+            directoryName = Path.GetDirectoryName(filePathOut);
+            DateTime d = DateTime.Now;
+            string A = d.ToString("dd-MM-yyyy-HH-mm-ss");
+            string filePathOutput = Path.Combine(directoryName, result+A + extension);
             finalList.Clear();
-            frequenciesNotSortedTest.Clear();
-            string filePathOutput = @"E:\FACULTATE\an 4\Sem1_Mine\output13.txt";
-            ReadFrequency(filePathOutput, out finalDictionarySorted1,out lastBitsRemained,out sum);
-            CalculateFrequency(contentOfBytes, out finalDictionarySorted1, out frequenciesNotSortedTest);
+            ReadFrequency(filePathOut, out finalDictionarySorted1,out lastBitsRemained,out sum);
+            finalDictionarySorted1 = finalDictionarySorted1.OrderBy((x => x.Value)).ToDictionary(x => x.Key, x => x.Value);
             CalculateSumDependingOnFrequency(finalDictionarySorted1, out finalDictionarySortedSum);
 
             ShannonTree(0, finalDictionarySortedSum, "");
+            BitWriter bitWriter2 = new BitWriter(filePathOutput);
             string content = "";
-
+            fluxFinalF=finalList;
            foreach (KeyValuePair<byte, int> unmodifiedFlux in finalDictionarySorted1)
             {
                 foreach (KeyValuePair<byte, string> pair in finalList)
@@ -58,58 +77,78 @@ namespace Shannon
                         fluxFinal.Add(Tuple.Create(pair.Key, pair.Value, unmodifiedFlux.Value));
                     }
 
-
                 }
 
             }
+            int b;
+        //    System.Windows.Forms.Application.DoEvents();
             do {
-                foreach (Tuple<byte, string,int> modifiedFlux in fluxFinal)
+                b = 0;
+                for (int i = 0; i < lastBitsRemained.Length; i++)
                 {
-                    for (int i = 0; i < lastBitsRemained.Length; i++)
+                    content += lastBitsRemained[i];
+                    foreach (Tuple<byte, string, int> modifiedFlux in fluxFinal)
                     {
-                        content += lastBitsRemained[i];
+                       
                         if (content == modifiedFlux.Item2)
                         {
-                            bitWriter2.WriteNBits(8,Convert.ToInt16(modifiedFlux.Item1));
+                            bitWriter2.WriteNBits(8, Convert.ToInt16(modifiedFlux.Item1));
 
-                            sum -= modifiedFlux.Item3;
+                            sum -= 1;
                             content = "";
                             var list = lastBitsRemained.ToList();
                             for (int j = 0; j <= i; j++)
                             {
-                                list.RemoveAt(i);
-                               
+                                list.Remove(lastBitsRemained[j]);
+
                             }
                             lastBitsRemained = list.ToArray();
+                            b = 1;
                         }
-                }
+                    }
+                    if (b== 1)
+                    {
+                        break;
+                    }
                 }
 
             } while (sum>0);
-            
 
+            return true;
 
         }
 
         
-        public bool EncodeShannon(byte[] contentOfBytes,out Dictionary<byte,string>finalList1 )
+        public bool EncodeShannon(byte[] contentOfBytes,int a,out Dictionary<byte,string>finalList1 )
         {
-            string filePathOutput = @"E:\FACULTATE\an 4\Sem1_Mine\output13.txt";
-
-            bitWriter = new BitWriter(filePathOutput);
-
+            this.a = a;
+            if (a == 1)
+            {
+                string result1;
+                extension = Path.GetExtension(filePath);
+                result1 = Path.GetFileNameWithoutExtension(filePath);
+                string directoryName1;
+                directoryName1 = Path.GetDirectoryName(filePath);
+                string ext = ".SF";
+                string filePathOutput = Path.Combine(directoryName1, result1 + ext);
+                bitWriter = new BitWriter(filePathOutput);
+            }
+           
             this.contentOfBytes = contentOfBytes;
             finalList1 = new Dictionary<byte, string>();
             CalculateFrequency(contentOfBytes, out finalDictionarySorted,out frequenciesNotSortedTest);
             CalculateSumDependingOnFrequency(finalDictionarySorted, out finalDictionarySortedSum);
-            WriteHeader(contentOfBytes);
+            if (a == 1)
+            {
+                WriteHeader(contentOfBytes); 
+            }
           
             finalList1 = finalList;
-
             ShannonTree(0, finalDictionarySortedSum, "");
             finalList2 = finalList1;
             foreach (Tuple<byte, int> unmodifiedFlux in frequenciesNotSortedTest)
             {
+
                 foreach (KeyValuePair<byte, string> pair in finalList1)
                 {
                     if (unmodifiedFlux.Item1 == pair.Key)
@@ -117,33 +156,34 @@ namespace Shannon
                         flux.Add(Tuple.Create(pair.Key,pair.Value));
                     }
 
-
                 }
 
             }
-            foreach (Tuple<byte, string> pair in flux)
+            if (a == 1)
             {
-                string s = pair.Item2;
-                for (var i = 0; i < s.Length; i++)
+                foreach (Tuple<byte, string> pair in flux)
                 {
-                    if (s[i] == '0')
+                    string s = pair.Item2;
+                    for (var i = 0; i < s.Length; i++)
                     {
-                        bitWriter.WriteNBits(1, 0);
-                    }
-                    else
-                    {
-                        bitWriter.WriteNBits(1, 1);
+                        if (s[i] == '0')
+                        {
+                            bitWriter.WriteNBits(1, 0);
+                        }
+                        else
+                        {
+                            bitWriter.WriteNBits(1, 1);
+                        }
                     }
                 }
+
+                bitWriter.WriteNBits(7, 0xfF);
+
+                bitWriter.Dispose();
+
             }
+           
 
-            bitWriter.WriteNBits(7, 0xfF);
-          
-             bitWriter.Dispose();
-
-         
-           DecodeShannon(filePathOutput);
-            
             return true;
             
 
@@ -181,8 +221,8 @@ namespace Shannon
                     }
 
                 }
-                int bytesRead = 512;
-               sum = 0;
+          
+                sum = 0;
                 for (int i = 0; i < 256; i++)
                 {
                     int ciit = counterFinal[i];
@@ -191,12 +231,12 @@ namespace Shannon
 
                         counterFinal1[i] = (int)bitReader.ReadNBits(ciit);
                         finalDictionarySorted1.Add((byte)i, counterFinal1[i]);
-                        bytesRead += ciit;
-                       sum += counterFinal1[i];
+                      
+                        sum += counterFinal1[i];
                     }
                 }
             
-              NBR -= bytesRead;
+             
              lastBitsRemained = new String[(int)NBR];
            
             for (int j = 0; j < (int)NBR; j++)
@@ -206,6 +246,7 @@ namespace Shannon
                 lastBitsRemained[j] += Convert.ToString(value);
             
             }
+            bitReader.Dispose();
             return true;
 
         }
@@ -331,7 +372,9 @@ namespace Shannon
             if (finalDictionarySortedSum.Count() == 1)
             {
                 finalList.Add(finalDictionarySortedSum.First().Item1,symbol);
-             
+                Console.WriteLine(finalDictionarySortedSum.First().Item1);
+                Console.WriteLine(symbol);
+
                 return ;
             }
             

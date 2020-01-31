@@ -41,8 +41,13 @@
             this.checkBoxCoder = new System.Windows.Forms.CheckBox();
             this.panelCoder = new System.Windows.Forms.Panel();
             this.shannonOutputTet = new System.Windows.Forms.TextBox();
-            this.decodeTextBox = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.panelCoder.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -114,6 +119,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "Load File";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // encodeFile
             // 
@@ -121,7 +127,7 @@
             this.encodeFile.Font = new System.Drawing.Font("Microsoft Tai Le", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.encodeFile.Location = new System.Drawing.Point(140, 124);
             this.encodeFile.Name = "encodeFile";
-            this.encodeFile.Size = new System.Drawing.Size(93, 28);
+            this.encodeFile.Size = new System.Drawing.Size(148, 28);
             this.encodeFile.TabIndex = 7;
             this.encodeFile.Text = "Encode File";
             this.encodeFile.UseVisualStyleBackColor = false;
@@ -135,6 +141,7 @@
             this.inputEncodeText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.inputEncodeText.Size = new System.Drawing.Size(180, 234);
             this.inputEncodeText.TabIndex = 8;
+            this.inputEncodeText.TextChanged += new System.EventHandler(this.inputEncodeText_TextChanged);
             // 
             // encodeInputTextBtn
             // 
@@ -148,6 +155,7 @@
             this.encodeInputTextBtn.TabIndex = 9;
             this.encodeInputTextBtn.Text = "Encode input text";
             this.encodeInputTextBtn.UseVisualStyleBackColor = false;
+            this.encodeInputTextBtn.Click += new System.EventHandler(this.encodeInputTextBtn_Click);
             // 
             // checkBoxCoder
             // 
@@ -175,15 +183,56 @@
             this.shannonOutputTet.Name = "shannonOutputTet";
             this.shannonOutputTet.Size = new System.Drawing.Size(158, 208);
             this.shannonOutputTet.TabIndex = 0;
+            this.shannonOutputTet.TextChanged += new System.EventHandler(this.shannonOutputTet_TextChanged);
             // 
-            // decodeTextBox
+            // panel1
             // 
-            this.decodeTextBox.Location = new System.Drawing.Point(601, 170);
-            this.decodeTextBox.Multiline = true;
-            this.decodeTextBox.Name = "decodeTextBox";
-            this.decodeTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.decodeTextBox.Size = new System.Drawing.Size(180, 234);
-            this.decodeTextBox.TabIndex = 12;
+            this.panel1.Controls.Add(this.textBox3);
+            this.panel1.Location = new System.Drawing.Point(604, 171);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(176, 233);
+            this.panel1.TabIndex = 12;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(3, 8);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(158, 208);
+            this.textBox3.TabIndex = 0;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.checkBox1.Location = new System.Drawing.Point(885, 227);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(85, 17);
+            this.checkBox1.TabIndex = 13;
+            this.checkBox1.Text = "Show codes";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.White;
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label3.Location = new System.Drawing.Point(536, 79);
+            this.label3.Margin = new System.Windows.Forms.Padding(2);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(352, 26);
+            this.label3.TabIndex = 14;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.button2.Font = new System.Drawing.Font("Microsoft Tai Le", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(636, 124);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(144, 28);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "Decode File";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
@@ -191,7 +240,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1031, 538);
-            this.Controls.Add(this.decodeTextBox);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelCoder);
             this.Controls.Add(this.checkBoxCoder);
             this.Controls.Add(this.encodeInputTextBtn);
@@ -208,6 +260,8 @@
             this.Text = "Form1";
             this.panelCoder.ResumeLayout(false);
             this.panelCoder.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,7 +282,11 @@
         private System.Windows.Forms.CheckBox checkBoxCoder;
         private System.Windows.Forms.Panel panelCoder;
         private System.Windows.Forms.TextBox shannonOutputTet;
-        private System.Windows.Forms.TextBox decodeTextBox;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button2;
     }
 }
 

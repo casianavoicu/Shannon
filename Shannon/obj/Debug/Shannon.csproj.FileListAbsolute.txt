@@ -8,3 +8,12 @@ E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\obj\Debug\Shan
 E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\obj\Debug\Shannon.csproj.CoreCompileInputs.cache
 E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\obj\Debug\Shannon.exe
 E:\FACULTATE\an 4\Sem1_Mine\Criptari\Shannon-Fano\Shannon\Shannon\obj\Debug\Shannon.pdb
+D:\School\Shannon\Shannon\Shannon\bin\Debug\Shannon.exe.config
+D:\School\Shannon\Shannon\Shannon\bin\Debug\Shannon.exe
+D:\School\Shannon\Shannon\Shannon\bin\Debug\Shannon.pdb
+D:\School\Shannon\Shannon\Shannon\obj\Debug\Shannon.csprojAssemblyReference.cache
+D:\School\Shannon\Shannon\Shannon\obj\Debug\Shannon.Form1.resources
+D:\School\Shannon\Shannon\Shannon\obj\Debug\Shannon.Properties.Resources.resources
+D:\School\Shannon\Shannon\Shannon\obj\Debug\Shannon.csproj.GenerateResource.cache
+D:\School\Shannon\Shannon\Shannon\obj\Debug\Shannon.exe
+D:\School\Shannon\Shannon\Shannon\obj\Debug\Shannon.pdb

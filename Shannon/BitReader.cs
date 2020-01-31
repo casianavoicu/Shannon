@@ -66,7 +66,10 @@ namespace Shannon
             return result;
 
         }
-      
 
+        public void Dispose()
+        {
+            inputFileContent.Close();
+        }
     }
 }
